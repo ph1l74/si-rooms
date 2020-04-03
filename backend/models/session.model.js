@@ -5,18 +5,19 @@ const Schema = mongoose.Schema;
 const sessionSchema = new Schema({
     _id: String,
     players: [{
-        type: Schema.Types.ObjectId, ref:'Player'
+        type: Schema.Types.ObjectId, ref: 'Player'
     }],
     scores: [{
-        type: Schema.Types.ObjectId, ref:'Score'
+        type: Schema.Types.ObjectId, ref: 'Score'
     }],
-    gamemasterId: {
-        type: Schema.Types.ObjectId, ref:'Player',
+    gamemaster: {
+        type: Schema.Types.ObjectId, ref: 'Player',
         required: true
     },
     room: {
-        type: Schema.Types.ObjectId, ref:'Room'
+        type: Schema.Types.ObjectId, ref: 'Room'
     },
+    isActive: Boolean,
     timestamps: true
 })
 
