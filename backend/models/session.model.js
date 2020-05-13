@@ -17,9 +17,10 @@ const sessionSchema = new Schema({
     room: {
         type: Schema.Types.ObjectId, ref: 'Room'
     },
-    isActive: Boolean,
-    timestamps: true
-})
+    isActive: { type: Boolean }
+},
+    { timestamps: { type: true } }
+)
 
 const Session = mongoose.model('Session', sessionSchema);
 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Session = require('../models/score.model');
+let Session = require('../models/session.model');
 
 
 router.route('/').get((req, res) => {

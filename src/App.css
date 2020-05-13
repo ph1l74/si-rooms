@@ -1,38 +1,56 @@
-.App {
-  text-align: center;
+.si-heading {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body {
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Jost', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.si-navbar-item div {
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.card-icon {
+  margin-left: 10px;
+}
+
+.card-connect {
+  color: rgb(54, 54, 54);
+}
+
+.card-connect:hover {
+  cursor: pointer;
+  background-color: rgba(244, 67, 54, 0.5803921568627451);
+}
+
+.si-user {
+  font-size: 3em;
+}
+
+.si-avatar-quazi {
+  height: 64px;
+  padding: 8px;
+}
+
+.si-player-score-control {
   color: white;
+  font-size: 1.2em;
 }
 
-.App-link {
-  color: #61dafb;
+.si-player-score-control.plus {
+  background-color: #3eafa7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.si-player-score-control.plus:hover,
+.si-player-score-control.minus:hover {
+  cursor: pointer;
+}
+
+.si-player-score-control.minus {
+  background-color: #cc3a31;
+}
+
+.si-player-name{
+  padding-top:16px
 }

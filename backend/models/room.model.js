@@ -16,9 +16,11 @@ const roomSchema = new Schema({
         type: Schema.Types.ObjectId, ref: 'Player',
         required: true,
         trim: true
-    },
-    timestamps: true
-})
+    }
+}, {
+    timestamps: { type: true }
+}
+)
 
 const Room = mongoose.model('Room', roomSchema);
 

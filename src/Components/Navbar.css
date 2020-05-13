@@ -1,0 +1,17 @@
+.si-navbar-item {
+    font-size: 2em;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.si-navbar-name {
+    font-size: 2em;
+}
+
+.si-navbar-item:hover {
+    font-size: 2em;
+    font-weight: 800;
+    cursor: pointer;
+    background-color: rgba(244, 67, 54, 0.5803921568627451);
+    color: white;
+}
