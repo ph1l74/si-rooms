@@ -7,8 +7,8 @@ import rootReducer from './Reducers';
 import { CookiesProvider } from "react-cookie";
 import MainPage from './Components/MainPage';
 
-const store = createStore(rootReducer, { username: null }
-  // + window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(rootReducer, { user: {name: null, id: null} }
+  + window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 

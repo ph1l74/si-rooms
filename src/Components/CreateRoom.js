@@ -2,13 +2,21 @@ import React, { useEffect, useState } from 'react';
 import './LogIn.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-const CreateRoom = ({close}) => {
+const CreateRoom = ({ close }) => {
 
-    const [inputCorrect, setInputCorrect] = useState(false)
+    const [inputCorrect, setInputCorrect] = useState(false);
     const [userInput, setUserInput] = useState("");
-    const [cookiesName, setCookiesName] = useCookies(["userName"]);
-    const userName = useSelector(state => state.userName);
+    const userInfo = useSelector(state => state.user);
     const dispatch = useDispatch();
+    
+
+    const createId = () => {
+
+    }
+
+    const createRoom = ({roomName, gmId}) => {
+        console.log({roomName: roomName, gmId: gmId});
+    }
 
     const changeHandler = (e) => {
         setUserInput(e.target.value);
@@ -16,8 +24,7 @@ const CreateRoom = ({close}) => {
 
     const clickHandler = () => {
         if (userInput.length > 0) {
-            setCookiesName('userName', userInput, { path: '/' });
-            dispatch(setUserName(userInput));
+            createRoom({roomName: userInput, gmId: userInfo.id});
             close();
         }
     }
@@ -36,11 +43,11 @@ const CreateRoom = ({close}) => {
     return (
         <div className="sir-login-bg">
             <div className="sir-login-window">
-                <div className="sir-login-header">{`Привет, ${userName}!`}</div>
+                <div className="sir-login-header">Введите имя комнаты</div>
                 <div className="sir-login-input">
-                    <input onChange={changeHandler} placeholder="Ваше имя" value={userInput}></input>
+                    <input onChange={changeHandler} placeholder="Имя комнаты" value={userInput}></input>
                 </div>
-                <div onClick={clickHandler} className={inputCorrect ? "sir-login-button correct" : "sir-login-button"}>{inputCorrect ? "Сменить имя" : "Введите имя"}</div>
+                <div onClick={clickHandler} className={inputCorrect ? "sir-login-button correct" : "sir-login-button"}>{inputCorrect ? "Ок" : "Введите имя"}</div>
                 <div onClick={close} className="sir-login-button">Отмена</div>
             </div>
         </div>

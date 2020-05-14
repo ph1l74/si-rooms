@@ -5,11 +5,12 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Navbar.css';
 import Configure from './Configure'
+import CreateRoom from './CreateRoom'
 
 
 const StarterNavbar = () => {
 
-    const userName = useSelector(state => state.userName);
+    const userName = useSelector(state => state.user.name);
     const [isVisibleConfig, setVisibleConfig] = useState(false);
     const [isVisibleRoomCreate, setVisibleRoomCreate] = useState(false);
 
@@ -35,7 +36,7 @@ const StarterNavbar = () => {
                     </Navbar.Item>
                 </Navbar.Container>
             </Navbar.Menu>
-            {isVisibleRoomCreate ? <Configure close={closeRoomCreate}></Configure> : null}
+            {isVisibleRoomCreate ? <CreateRoom close={closeRoomCreate}></CreateRoom> : null}
             {isVisibleConfig ? <Configure close={closeConfig}></Configure> : null}
         </Navbar>
     )

@@ -55,7 +55,15 @@
 }
 
 .sir-login-button.correct {
-    background-color: rgb(76, 175, 80);
+    background-color: rgba(76, 175, 80);
+}
+
+.sir-login-button:hover {
+    background-color: rgba(244, 67, 54, 0.75);
+}
+
+.sir-login-button.correct:hover {
+    background-color: rgba(76, 175, 80, 0.75);
 }
 
 @keyframes appear {

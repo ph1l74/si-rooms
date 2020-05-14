@@ -15,9 +15,16 @@ const LogIn = () => {
         setUserInput(e.target.value);
     }
 
+    const createId = () => {
+        const prefix = (new Date().getTime() % Math.floor (Math.random() * Math.floor(512))).toString(16);
+        const id = prefix + Math.floor(new Date().getTime() / Math.floor (Math.random() * Math.floor(512)));
+        return id;
+    }
+
     const clickHandler = () => {
         if (userInput.length > 0) {
             setCookiesName('userName', userInput, {path: '/'});
+            setCookiesName('userId', createId(), {path: '/'});
             dispatch(setUserName(userInput));
         }
     }

@@ -6,3 +6,11 @@ export const setUserName = (value) => {
         value
     }
 }
+
+
+export const setUserId = (value) => {
+    return {
+        type: types.SET_USERID,
+        value
+    }
+}

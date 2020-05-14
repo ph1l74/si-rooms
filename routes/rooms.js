@@ -1,26 +1,26 @@
 const router = require('express').Router();
-let Room = require('../models/room.model');
+let Rooms = require('../models/room.model');
 
 
 router.route('/').get((req, res) => {
-    Room.find()
+    Rooms.find()
         .then(rooms => res.json(rooms))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/add').post((req, res) => {
     const roomname = req.body.roomname;
-    const players = [];
     const gamemaster = req.body.gamemaster;
-    
-    const newRoom = new Room({ roomname, players, gamemaster });
+
+    const newRoom = new Rooms({ roomname, gamemaster });
+
+    newRoom.markModified();
 
     newRoom.save()
-        .then(() => res.json('Room added.'))
+        .then(() => res.json(`Room ${roomname} added.`))
         .catch(err => res.status(400).json('Error: ' + err));
+
 })
 
-router.route('/update').post((req, res) => {
-});
 
-module.exports = router
+module.exports = router;
