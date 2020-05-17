@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './LogIn.css';
+import { addRoom } from '../Actions';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import './LogIn.css';
 
 const CreateRoom = ({ close }) => {
 
@@ -8,14 +10,15 @@ const CreateRoom = ({ close }) => {
     const [userInput, setUserInput] = useState("");
     const userInfo = useSelector(state => state.user);
     const dispatch = useDispatch();
-    
 
-    const createId = () => {
 
-    }
+    const createRoom = async ({ roomName, gmId }) => {
 
-    const createRoom = ({roomName, gmId}) => {
-        console.log({roomName: roomName, gmId: gmId});
+        await axios.post('http://127.0.0.1:8080/rooms/add', { roomname: roomName, gamemaster: gmId })
+            .then((response) => {
+                dispatch(addRoom(response.data));
+            })
+
     }
 
     const changeHandler = (e) => {
@@ -24,11 +27,10 @@ const CreateRoom = ({ close }) => {
 
     const clickHandler = () => {
         if (userInput.length > 0) {
-            createRoom({roomName: userInput, gmId: userInfo.id});
+            createRoom({ roomName: userInput, gmId: userInfo.id });
             close();
         }
     }
-
 
     useEffect(() => {
         if (userInput.length > 0) {

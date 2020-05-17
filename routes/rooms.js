@@ -14,10 +14,12 @@ router.route('/add').post((req, res) => {
 
     const newRoom = new Rooms({ roomname, gamemaster });
 
+    console.log(req.body);
+
     newRoom.markModified();
 
     newRoom.save()
-        .then(() => res.json(`Room ${roomname} added.`))
+        .then(() => res.json(newRoom))
         .catch(err => res.status(400).json('Error: ' + err));
 
 })

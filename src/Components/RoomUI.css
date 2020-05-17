@@ -1,0 +1,8 @@
+.sir-room-btn {
+    min-height: 20vh;
+    background-color: rgb(244, 67, 54);
+}
+
+.sir-room-btn.active {
+    background-color: rgba(76, 175, 80);
+}

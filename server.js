@@ -8,7 +8,7 @@ import E from './common/events';
 require('dotenv').config();
 
 const app = express();
-const port = process.env.SOCKET_PORT || 5000;
+const port = process.env.SOCKET_PORT || 8080;
 
 app
     .use('/', express.static(path.resolve(__dirname, 'build')))

@@ -8,7 +8,7 @@ const Configure = ({close}) => {
 
     const [inputCorrect, setInputCorrect] = useState(false)
     const [userInput, setUserInput] = useState("");
-    const [cookiesName, setCookiesName] = useCookies(["userName"]);
+    const [, setCookiesName] = useCookies(["userName"]);
     const userName = useSelector(state => state.user.name);
     const dispatch = useDispatch();
 

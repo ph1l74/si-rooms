@@ -8,7 +8,7 @@ const LogIn = () => {
 
     const [inputCorrect, setInputCorrect] = useState(false)
     const [userInput, setUserInput] = useState("");
-    const [cookiesName, setCookiesName] = useCookies(["userName"]);
+    const [, setCookiesName] = useCookies(["userName", "userId"]);
     const dispatch = useDispatch();
 
     const changeHandler = (e) => {
@@ -16,15 +16,15 @@ const LogIn = () => {
     }
 
     const createId = () => {
-        const prefix = (new Date().getTime() % Math.floor (Math.random() * Math.floor(512))).toString(16);
-        const id = prefix + Math.floor(new Date().getTime() / Math.floor (Math.random() * Math.floor(512)));
+        const prefix = (new Date().getTime() % Math.floor(Math.random() * Math.floor(512))).toString(16);
+        const id = prefix + Math.floor(new Date().getTime() / Math.floor(Math.random() * Math.floor(512)));
         return id;
     }
 
     const clickHandler = () => {
         if (userInput.length > 0) {
-            setCookiesName('userName', userInput, {path: '/'});
-            setCookiesName('userId', createId(), {path: '/'});
+            setCookiesName('userName', userInput, { path: '/' });
+            setCookiesName('userId', createId(), { path: '/' });
             dispatch(setUserName(userInput));
         }
     }
