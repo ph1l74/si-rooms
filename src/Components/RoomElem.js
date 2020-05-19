@@ -7,13 +7,16 @@ import './RoomElem.css';
 
 export const RoomElem = ({ roomName, roomId }) => {
 
-    const [, setCookiesName] = useCookies(["currentRoom"]);
+    const [cookies, setCookies] = useCookies(["activeGame"]);
 
     const dispatch = useDispatch();
 
     const connectToRoom = () => {
+        console.log(cookies)
+        let activeGame = cookies.activeGame || { room: null }
+        setCookies('activeGame', { ...activeGame, room: roomId }, { path: '/' });
         dispatch(joinRoom(roomId))
-        setCookiesName('currentRoom', roomId, { path: '/' });
+
     }
 
     return (

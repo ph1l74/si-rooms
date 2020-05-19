@@ -7,7 +7,22 @@ import rootReducer from './Reducers';
 import { CookiesProvider } from "react-cookie";
 import MainPage from './Components/MainPage';
 
-const store = createStore(rootReducer, { user: { name: null, id: null }, rooms: [], currentRoom: null }
+const initState =
+{
+  user:
+  {
+    name: null,
+    id: null
+  },
+  rooms: [],
+  activeGame:
+  {
+    room: null,
+    conStatus: null
+  }
+}
+
+const store = createStore(rootReducer, initState
   + window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

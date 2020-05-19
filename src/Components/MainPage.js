@@ -15,20 +15,20 @@ import Navbar from './Navbar';
 const MainPage = () => {
 
     const userName = useSelector(state => state.user.name);
-    const currentRoom = useSelector(state => state.currentRoom);
-    const [cookiesName] = useCookies(["userName", "userId", "currentRoom"]);
+    const currentRoom = useSelector(state => state.activeGame.room);
+    const [cookies] = useCookies(["userName", "userId", "activeGame"]);
     const dispatch = useDispatch();
 
 
     useEffect(() => {
-        if (cookiesName.userName && cookiesName.userName.length > 0) {
-            dispatch(setUserName(cookiesName.userName))
+        if (cookies.userName && cookies.userName.length > 0) {
+            dispatch(setUserName(cookies.userName))
         }
-        if (cookiesName.userId && cookiesName.userId.length > 0) {
-            dispatch(setUserId(cookiesName.userId))
+        if (cookies.userId && cookies.userId.length > 0) {
+            dispatch(setUserId(cookies.userId))
         }
-        if (cookiesName.currentRoom && cookiesName.currentRoom.length > 0) {
-            dispatch(joinRoom(cookiesName.currentRoom))
+        if (cookies.activeGame.room && cookies.activeGame.room.length > 0) {
+            dispatch(joinRoom(cookies.activeGame.room))
         }
 
         const fetchData = async () => {
@@ -40,7 +40,7 @@ const MainPage = () => {
 
         fetchData();
 
-    }, [cookiesName, dispatch])
+    }, [cookies, dispatch])
 
     return (
         <Hero color="light" size="fullheight">

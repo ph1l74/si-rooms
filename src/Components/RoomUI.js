@@ -5,7 +5,7 @@ import './RoomUI.css';
 // import { useDispatch } from 'react-redux';
 // import { joinRoom } from '../Actions';
 
-export const RoomUI = ({ roomName, roomId }) => {
+export const RoomUI = () => {
 
     // const dispatch = useDispatch();
 
