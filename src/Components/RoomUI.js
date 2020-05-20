@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, Heading, Button, Section, Container } from 'react-bulma-components';
+import { Box,  Heading, Button, Section, Container } from 'react-bulma-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { socket } from './MainPage';
 
