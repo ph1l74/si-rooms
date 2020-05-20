@@ -11,8 +11,8 @@ import { RoomUI } from '../Components/RoomUI';
 import LogIn from './LogIn'
 import Navbar from './Navbar';
 
-import E from '../Events/events';
-import {HOST, WS_HOST} from '../Constants/index';
+import E from '../Events';
+import { HOST, WS_HOST } from '../Constants/index';
 
 let socket;
 
@@ -40,7 +40,7 @@ const MainPage = () => {
 
         const fetchData = async () => {
             const result = await axios(
-                HOST+'/rooms',
+                HOST + '/rooms',
             );
             dispatch(setRooms(result.data));
         };
