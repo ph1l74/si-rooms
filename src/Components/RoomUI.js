@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box,  Heading, Button, Section, Container } from 'react-bulma-components';
+import { Box, Heading, Button, Section, Container } from 'react-bulma-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { socket } from './MainPage';
 
 
-import E from '../Events/events';
+import E from '../Events';
 import './RoomUI.css';
 
 // import { useDispatch } from 'react-redux';
