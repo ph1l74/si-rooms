@@ -12,14 +12,13 @@ import LogIn from './LogIn'
 import Navbar from './Navbar';
 
 import E from '../Events/events';
+import {HOST, WS_HOST} from '../Constants/index';
 
-// const HOST = window.location.origin.replace(/^http/, 'ws');
-// const WS_HOST = window.location.origin.replace(/^http/, 'ws');
 let socket;
 
 const MainPage = () => {
 
-    socket = io.connect("ws://localhost:8888/", { reconnection: true });
+    socket = io.connect(WS_HOST, { reconnection: true });
 
     const userName = useSelector(state => state.user.name);
     const userId = useSelector(state => state.user.id);
@@ -41,7 +40,7 @@ const MainPage = () => {
 
         const fetchData = async () => {
             const result = await axios(
-                'http://127.0.0.1:8888/rooms',
+                HOST+'/rooms',
             );
             dispatch(setRooms(result.data));
         };

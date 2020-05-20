@@ -38,6 +38,12 @@ export const joinRoom = (value) => {
     }
 }
 
+export const exitRoom = () => {
+    return {
+        type: types.EXIT_ROOM
+    }
+}
+
 export const setConStatus = (value) => {
     return {
         type: types.SET_CON_STATUS,

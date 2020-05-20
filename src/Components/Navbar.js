@@ -2,7 +2,9 @@ import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Navbar } from 'react-bulma-components';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { exitRoom } from '../Actions';
 import Configure from './Configure'
 import CreateRoom from './CreateRoom'
 
@@ -16,10 +18,18 @@ const StarterNavbar = () => {
     const connected = useSelector(state => state.activeGame.conStatus);
     const [isVisibleConfig, setVisibleConfig] = useState(false);
     const [isVisibleRoomCreate, setVisibleRoomCreate] = useState(false);
+    const [, setActiveGame] = useCookies(["activeGame"]);
+    const dispatch = useDispatch();
+
     const openConfig = () => setVisibleConfig(true);
     const closeConfig = () => setVisibleConfig(false);
     const openRoomCreate = () => setVisibleRoomCreate(true);
     const closeRoomCreate = () => setVisibleRoomCreate(false);
+
+    const exitRoomByClick = () => {
+        setActiveGame('activeGame', null, { path: '/' });
+        dispatch(exitRoom());
+    }
 
     return (
         <Navbar
@@ -39,11 +49,18 @@ const StarterNavbar = () => {
                 </Navbar.Container>
                 <Navbar.Container position="end">
                     <Navbar.Item renderAs="div" className="si-navbar-name"> {userName} </Navbar.Item>
-                    <Navbar.Item renderAs="div" className="si-navbar-item" onClick={openRoomCreate}>
-                        <i className="fas fa-plus"></i>
-                    </Navbar.Item>
+                    {!activeGame.room ?
+                        <Navbar.Item renderAs="div" className="si-navbar-item" onClick={openRoomCreate}>
+                            <i className="fas fa-plus"></i>
+                        </Navbar.Item>
+                        :
+                        null
+                    }
                     <Navbar.Item renderAs="div" className="si-navbar-item" onClick={openConfig}>
                         <i className="fas fa-cog"></i>
+                    </Navbar.Item>
+                    <Navbar.Item renderAs="div" className="si-navbar-item" onClick={exitRoomByClick}>
+                        <i className="fas fa-sign-out-alt"></i>
                     </Navbar.Item>
                 </Navbar.Container>
             </Navbar.Menu>

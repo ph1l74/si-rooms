@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import './LogIn.css';
 
+import { HOST } from '../Constants';
+
 const CreateRoom = ({ close }) => {
 
     const [inputCorrect, setInputCorrect] = useState(false);
@@ -14,7 +16,7 @@ const CreateRoom = ({ close }) => {
 
     const createRoom = async ({ roomName, gmId }) => {
 
-        await axios.post('http://127.0.0.1:8080/rooms/add', { roomname: roomName, gamemaster: gmId })
+        await axios.post(HOST + '/rooms/add', { roomname: roomName, gamemaster: gmId })
             .then((response) => {
                 dispatch(addRoom(response.data));
             })

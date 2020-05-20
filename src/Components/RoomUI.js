@@ -18,31 +18,19 @@ export const RoomUI = () => {
     const userName = useSelector(state => state.user.name);
     const [results, setResults] = useState([]);
     const [timerState, setTimerState] = useState(false);
+    const [timeStore, setTimeStore] = useState();
+    const [isAdmin, setAdmin] = useState(false);
     const dispatch = useDispatch();
-    const time = "123123";
-
-    const checkPrivileges = () => {
-        allRooms.map((room) => {
-            console.log(room._id);
-        })
-
-        console.log(roomId);
-
-        const currentRoomObj = allRooms.filter((room) => {
-            return room._id === roomId
-        });
-
-
-        if (currentRoomObj.length > 0 && currentRoomObj[0].gamemaster === userId)
-            return true;
-        else
-            return false;
-    }
 
 
     const playerClickHandler = () => {
-        socket.emit(E.SEND_PLAYER_TIME_FROM_CLIENT, { userName, time });
-        setResults([...results, { userName: userName, time: time }]);
+        if (timerState) {
+            const cuurentTime = new Date().getTime();
+            const time = cuurentTime - timeStore;
+            socket.emit(E.SEND_PLAYER_TIME_FROM_CLIENT, { userName, time });
+            setResults([...results, { userName: userName, time: time }]);
+            setTimerState(false);
+        }
     }
 
     const gmTimerStart = () => {
@@ -60,53 +48,67 @@ export const RoomUI = () => {
 
         socket.on(E.SEND_PLAYER_TIME_FROM_SERVER, ({ userName, time }) => {
             setResults([...results, { userName: userName, time: time }])
+            setTimerState(false);
         })
 
         socket.on(E.SEND_TIMER_START_FROM_SERVER, ({ timerStatus }) => {
-            console.log(timerStatus);
             setTimerState(timerStatus);
+            const currentTime = new Date().getTime();
+            setTimeStore(currentTime);
+            if (timerStatus) {
+                setResults([]);
+            }
         })
 
-    }, [roomId, dispatch, userId, results])
+
+        if (allRooms.length > 0) {
+            const currentRoomObj = allRooms.filter((room) => {
+                return room._id === roomId
+            });
+            if (currentRoomObj.length > 0 && currentRoomObj[0].gamemaster === userId)
+                setAdmin(true)
+        }
+    }, [roomId, dispatch, userId, results, allRooms])
 
 
 
     return (
         <Container >
-            {checkPrivileges() ?
-                <Section>
+            {
+                isAdmin ?
+                    <Section>
+                        <Section>
+                            <Button
+                                fullwidth
+                                rounded
+                                onClick={gmTimerStart}
+                                className="sir-room-admin-btn"
+                            >
+                                Запустить таймер
+                            </Button>
+                        </Section>
+                        <Section>
+                            <Button
+                                fullwidth
+                                rounded
+                                onClick={gmTimerStop}
+                                className="sir-room-admin-btn"
+                            >
+                                Остановить таймер
+                            </Button>
+                        </Section>
+                    </Section>
+                    :
                     <Section>
                         <Button
                             fullwidth
                             rounded
-                            onClick={gmTimerStart}
-                            className="sir-room-btn"
+                            className={timerState ? "sir-room-btn active" : "sir-room-btn"}
+                            onClick={playerClickHandler}
                         >
-                            Запустить таймер
-                            </Button>
-                    </Section>
-                    <Section>
-                        <Button
-                            fullwidth
-                            rounded
-                            onClick={gmTimerStop}
-                            className="sir-room-btn"
-                        >
-                            Остановить таймер
-                            </Button>
-                    </Section>
-                </Section>
-                :
-                <Section>
-                    <Button
-                        fullwidth
-                        rounded
-                        className="sir-room-btn"
-                        onClick={playerClickHandler}
-                    >
 
-                    </Button>
-                </Section>
+                        </Button>
+                    </Section>
             }
 
             <Section>
