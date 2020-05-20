@@ -3,17 +3,19 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Navbar } from 'react-bulma-components';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import './Navbar.css';
 import Configure from './Configure'
 import CreateRoom from './CreateRoom'
+
+import './Navbar.css';
 
 
 const StarterNavbar = () => {
 
     const userName = useSelector(state => state.user.name);
+    const activeGame = useSelector(state => state.activeGame);
+    const connected = useSelector(state => state.activeGame.conStatus);
     const [isVisibleConfig, setVisibleConfig] = useState(false);
     const [isVisibleRoomCreate, setVisibleRoomCreate] = useState(false);
-
     const openConfig = () => setVisibleConfig(true);
     const closeConfig = () => setVisibleConfig(false);
     const openRoomCreate = () => setVisibleRoomCreate(true);
@@ -26,11 +28,20 @@ const StarterNavbar = () => {
             active
         >
             <Navbar.Menu >
+                <Navbar.Container position="start">
+                    {activeGame.room ?
+                        <Navbar.Item id="conStatus" renderAs="div" className={connected ? "si-navbar-name connected" : "si-navbar-name disconnected"}>
+                            <i className="fas fa-dot-circle"></i>
+                        </Navbar.Item>
+                        :
+                        null
+                    }
+                </Navbar.Container>
                 <Navbar.Container position="end">
                     <Navbar.Item renderAs="div" className="si-navbar-name"> {userName} </Navbar.Item>
                     <Navbar.Item renderAs="div" className="si-navbar-item" onClick={openRoomCreate}>
                         <i className="fas fa-plus"></i>
-                        </Navbar.Item>
+                    </Navbar.Item>
                     <Navbar.Item renderAs="div" className="si-navbar-item" onClick={openConfig}>
                         <i className="fas fa-cog"></i>
                     </Navbar.Item>

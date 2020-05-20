@@ -37,3 +37,10 @@ export const joinRoom = (value) => {
         value
     }
 }
+
+export const setConStatus = (value) => {
+    return {
+        type: types.SET_CON_STATUS,
+        value
+    }
+}

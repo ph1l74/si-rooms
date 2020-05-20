@@ -9,6 +9,14 @@
     font-size: 2em;
 }
 
+#conStatus.si-navbar-name.connected {
+    color: rgba(76, 175, 80);
+}
+
+#conStatus.si-navbar-name.disconnected {
+    color: rgb(244, 67, 54);
+}
+
 .si-navbar-item:hover {
     font-size: 2em;
     font-weight: 800;

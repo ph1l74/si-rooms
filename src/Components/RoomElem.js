@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { joinRoom } from '../Actions';
 import './RoomElem.css';
 
+
 export const RoomElem = ({ roomName, roomId }) => {
 
     const [cookies, setCookies] = useCookies(["activeGame"]);

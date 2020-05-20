@@ -2,13 +2,13 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import socket from 'socket.io';
-import mongoose from'mongoose';
+import mongoose from 'mongoose';
 import E from './common/events';
 
 require('dotenv').config();
 
 const app = express();
-const port = process.env.SOCKET_PORT || 8080;
+const port = process.env.SOCKET_PORT || 8888;
 
 app
     .use('/', express.static(path.resolve(__dirname, 'build')))
@@ -33,9 +33,14 @@ const server = app.listen(port, () => {
 const io = socket(server);
 
 io.on('connection', (sock) => {
-    console.log(`user connected: ${socket.id}`);
+    console.log(`user connected: ${sock.id}`);
 
-    sock.on(E.CREATE_ROOM_FROM_CLIENT, ({ room }) => {
-        sock.broadcast.emit(E.CREATE_ROOM_FROM_SERVER, { room })
+    sock.on(E.JOIN_ROOM_FROM_CLIENT, ({ roomId, userId }) => {
+        sock.broadcast.emit(E.JOIN_ROOM_FROM_SERVER, ({ roomId, userId }));
+    });
+
+
+    sock.on(E.SEND_PLAYER_TIME_FROM_CLIENT, ({ userName, time }) => {
+        sock.broadcast.emit(E.SEND_PLAYER_TIME_FROM_SERVER, ({ userName, time }));
     })
 })

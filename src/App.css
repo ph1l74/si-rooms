@@ -5,6 +5,7 @@
 html, body {
   /* font-family: 'Roboto', sans-serif; */
   font-family: 'Jost', sans-serif;
+  background-color: #f5f5f5;
 }
 
 .si-navbar-item div {
@@ -42,8 +43,7 @@ html, body {
   background-color: #3eafa7;
 }
 
-.si-player-score-control.plus:hover,
-.si-player-score-control.minus:hover {
+.si-player-score-control.plus:hover, .si-player-score-control.minus:hover {
   cursor: pointer;
 }
 
@@ -51,6 +51,6 @@ html, body {
   background-color: #cc3a31;
 }
 
-.si-player-name{
-  padding-top:16px
+.si-player-name {
+  padding-top: 16px
 }

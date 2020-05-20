@@ -26,7 +26,9 @@ const rootReducer = (state = initState, action) => {
         case types.ADD_ROOM:
             return { ...state, rooms: [...state.rooms, action.value] }
         case types.JOIN_ROOM:
-            return { ...state, activeGame: {...state.activeGame, room: action.value} }
+            return { ...state, activeGame: { ...state.activeGame, room: action.value } }
+        case types.SET_CON_STATUS:
+            return { ...state, activeGame: { ...state.activeGame, conStatus: action.value } }
         default:
             return state
     }
