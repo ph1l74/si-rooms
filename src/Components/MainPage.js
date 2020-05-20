@@ -14,6 +14,7 @@ import Navbar from './Navbar';
 import E from '../Events/events';
 
 // const HOST = window.location.origin.replace(/^http/, 'ws');
+// const WS_HOST = window.location.origin.replace(/^http/, 'ws');
 let socket;
 
 const MainPage = () => {

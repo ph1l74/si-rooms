@@ -43,4 +43,8 @@ io.on('connection', (sock) => {
     sock.on(E.SEND_PLAYER_TIME_FROM_CLIENT, ({ userName, time }) => {
         sock.broadcast.emit(E.SEND_PLAYER_TIME_FROM_SERVER, ({ userName, time }));
     })
+
+    sock.on(E.SEND_TIMER_START_FROM_CLIENT, ({timerStatus}) => {
+        sock.broadcast.emit(E.SEND_TIMER_START_FROM_SERVER,({timerStatus}))
+    })
 })
